@@ -1,0 +1,17 @@
+# Project 1: PlayList Analyzer
+
+*Author: Austen Hale
+*Class: CS121 Section 003
+*Semester: Fall 2018
+
+##Overview
+This program allows the user to input three songs; listing song title, song artist,
+song play time, and song filepath for each song inputted. The songs are then sorted
+into a playlist.
+
+##Compiling and Using
+To use this program, simply run the program and follow the instructions on the console:
+input the song's title, artist, filepath, and playtime, and the program will do the rest.
+
+##Sources used
+No sources used outside of class PowerPoints or the book.

@@ -1,0 +1,22 @@
+# Project 5: Tic Tac Toe
+
+* Author: Austen Hale
+* Class: CS121 Section 3
+* Semester: Fall 2018
+
+## Overview
+
+This program allows a user to play a game of TicTacToe against a computer, on a GUI.
+My program also allows the user to see how many games were played, and whom won each one.
+
+## Compiling and Using
+
+To compile the code, simply run the program, or type 'javac TicTacToeGUI.java' followed by 
+'java TiCTacToeGUI' into the console. As for playing the game, it is just like a game of
+Tic-Tac-Toe, where you (X) choose a spot, and the computer chooses another spot. The game
+continue until either player matches 3 in a row, diagonal, or column, or all spaces are taken.
+
+## Sources Used
+
+http://www.java2s.com/Code/Java/Collections-Data-Structure/clonetwodimensionalarray.htm
+https://stackoverflow.com/questions/10423134/java-copy-section-of-array

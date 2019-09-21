@@ -1,0 +1,13 @@
+Enter title: Enter artist: Enter play time (mm:ss): Enter file name: Enter title: Enter artist: Enter play time (mm:ss): Enter file name: Enter title: Enter artist: Enter play time (mm:ss): Enter file name: 
+
+Average play time for songs: 260.67
+
+Song with play time closest to 240 secs: Big Jet Plane
+
+==============================================================================
+Title                Artist               File Name                  Play Time
+==============================================================================
+Where you end        Moby                 sounds/classical.wav             198
+Big Jet Plane        Julia Stone          sounds/westernBeat.wav           234
+Last Tango in Paris  Gotan Project        sounds/newAgeRhythm.wav          350
+==============================================================================

@@ -1,0 +1,25 @@
+#Project 3: Library Of Books
+
+*Author: Austen Hale
+*Class: CS121 Section 3
+*Semester: Fall 2018
+
+## Overview
+
+This program adds one of three pre-downloaded books, and adds them to a library. The user, after
+adding a book, can then read the book, add another book, delete a book, or print the library contents.
+
+## Compling and Using
+
+To use this program, begin by running it. The program will give the user a list of options to 
+choose from ((R)ead [a book], (A)dd [a book], (P)rint [the library], or (D)elete [a book]. To
+actually make use of the program, the user will first have to add a book and follow through 
+the instructions listed on the screen (and ensure that the filepath for the book is 
+exactly the same as the one they input). After adding a book, they can print the library to 
+see the index of the book. Using that index, they can either read the book by entering that index
+in the read section, or delete it by entering the same index in the delete section. Hitting Q
+will exit the program for the user.
+
+## Sources Used
+
+None outside of class material and the book.

@@ -1,0 +1,11 @@
+public class ModernArt {
+
+  public static void main(String[] args {
+  String name = "Austen";
+  Final int O = "O"
+  
+  System.out.print(O);
+  
+    
+  }
+}

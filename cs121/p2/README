@@ -1,0 +1,17 @@
+# Project 2: Jukebox Hero
+
+*Author: Austen Hale
+*Class: CS121 Section 003
+*Semester: Fall 2018
+
+## Overview
+The program will take the data from a cvs file (only one of the two provided files
+in the system), and create a music playlist. The playlist can then be sorted, analyzed, or printed.
+
+## Compling and Using
+To use this program, run the program. You will be given a menu section, where you will want to
+first load a music file (user must enter the file name). Load the file, and then from there you 
+can choose to either analyze the playlist, print the playlist,or search the playlist.
+
+## Sources used
+None outside of previous activites or class 

@@ -1,0 +1,28 @@
+# Project 4: Reader of Books
+
+* Author: Austen Hale
+* Class: CS121 Section 3
+* Semester: Fall 2018
+
+## Overview
+
+This program is a GUI that allows the user to import either 3 or 19 
+pre-downloaded books. From there, the user can select a book
+to read it and scroll through it.
+
+## Compiling and Using
+
+To compile the code, simply run the program. To use the code, after compiling,
+start by importing either booklist.csv or booklist-full.csv in the import books
+text area. After importing the books, select a book that you would like to read
+and scroll through it using the page up and page down buttons.
+
+## Sources Used
+
+The only source I used outside of class resources was to find out how to 
+measure from the top of the scrollbar (its extent). I found this out by 
+//credit JeroenWamerdam of StackOverflow
+			int extent = contentScrollPane.getVerticalScrollBar()
+					.getModel().getExtent();
+using the above code, which is credited to JeroenWamerdam of StackOverflow.
+https://stackoverflow.com/questions/12916192/how-to-know-if-a-jscrollbar-has-reached-the-bottom-of-the-jscrollpane
