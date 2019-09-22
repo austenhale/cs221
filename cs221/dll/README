@@ -1,0 +1,115 @@
+****************
+* Double Linked List with List Iterator
+* CS 221-3
+* 4/17/19
+* Austen Hale
+**************** 
+
+OVERVIEW:
+
+ 	This program implements a double linked list version of the indexed unsorted list
+ 	interface. It also performs a large amount of tests to ensure that the implementation
+ 	is correct.
+
+
+INCLUDED FILES:
+
+ 	*ListTester.java - This class tests the double linked list to ensure all its methods are working properly.
+ 	*IUDoubleLinkedList.java - This is the double linked version of the indexed unsorted list interface. It contains
+ 		all the methods for double linked list and the list iterator.
+ 	*LinearNode.java - Class that contains methods for nodes; these methods are used by IUDoubleLinkedList.java
+ 	*IndexedUnsortedList.java - Interface for the methods used in IUDoubleLInkedList.java
+ 	*README - For users to read before running the program
+
+
+COMPILING AND RUNNING:
+
+ 	From the directory containing all source files, compile the
+ 	driver class (and all dependencies) with the command:
+ 	$ javac ListTester.java
+
+ 	Run the compiled class file with the command:
+ 	$ java ListTester
+
+ 	The console output will be the results of the tests, stating which tests
+ 	fail, and keeping track of total tests run, passed, and failed. In the case of this program,
+ 	all tests should pass and there should be around 9900 tests in total.
+
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+
+	This program is split between two main classes, and two smaller classes, as previously mentioned above:
+	
+	ListTester.java:
+		This class is the tester class. It builds 82 scenarios in a variety of ways,
+		such as using the iterator to add or remove methods, or using one of the
+		double linked list methods to change a list into what the scenario end
+		result should be (such as adding or removing elements to get the wanted amount
+		of elements). After it builds all the scenarios, it calls one of four tester methods
+		(based off end list size). For example, if the end list size for a scenario is two
+		elements, it will call the testTwoElementList() method, and run tests appropriate to that
+		list size. Each test method for list sizes runs tests based off that size to ensure that
+		the methods present in IUDoubleLinkedList.java work properly. The ListTester also has 
+		iterator and iterator concurrency tests to ensure that the iterator functions exactly as 
+		it should: moving, adding, removing, setting properly and without failure.
+		
+	IUDoubleLinkedList.java:
+		This class is the implementation of the indexed unsorted list interface, but for a double
+		linked list instance. It contains every required method for indexed unsorted list, as well as
+		all the required methods for a list iterator class. All methods in this class will be used to run
+		tests in ListTester.java to ensure that they work properly.
+		
+	LinearNode.java:
+		A brief class that contains methods related to node usage such as getting the next or previous node,
+		or setting the element of a node.
+		
+	IndexedUnsortedList.java:
+		The interface for IUDoubleLinkedList.java. It contains all the javadocs for the methods in IUDOubleLinkedList.
+
+TESTING:
+
+ 	For testing this program, a tester class was made (ListTester.java). This class, as mentioned above,
+ 	runs a series of tests to ensure that IUDoubleLinkedList.java runs properly. All tests in this class
+ 	should output the expected result from a properly working method. In the case that a test fails,
+ 	it means that the method it is testing is wrong, NOT the test itself. As the matter of bad input,
+ 	this program requires no user input rather than running the program, and if the tester class finds
+ 	an unexpected exception, it throws an exception and continues to run.
+
+
+DISCUSSION:
+ 
+ 	There weren't too many issues during the development of this program. There were two main
+ 	issues that stumped me for a few hours. 
+ 
+ 	The first issue was implementing the list iterator add method, which proved 
+ 	to be harder than I anticipated. Creating the iterator add method was a whole mess
+ 	of issues during development of it; sometimes it would drop part of the list off,
+ 	other times it would add the element to the wrong spot, and for some scenarios it didn't even
+ 	add the element. I eventually fixed these issues by drawing out pictures of an iterator processing
+ 	through a scenario, and discovered how my add method was dropping elements from the list. After
+ 	fixing that issue by making sure the list stayed connected throughout the method, I ran into the issue
+ 	where for scenarios that called previous(), the element would be in the wrong spot, but methods that called
+ 	next() placed the element in the correct spot. After noticing this, I realized that I would have to split the
+ 	add method for list iterator in two parts: one for if next was the last called method for the scenario, or if it
+ 	was previous. After splitting the method like this, the method worked properly for all instances that it was used.
+ 
+ 	The second issue was also related to an add method, but this time it was the corner cases in the add methods of the double
+ 	linked list. These corner cases were mainly for if we were adding to the 0th index, the element was not added properly
+ 	and as such this threw an error due to the list being wrong. This issue, after being found by carefully examining the tester
+ 	class, was easily fixed by drawing out pictures for the case of adding at a certain index, and setting the next and previous
+ 	of the element being added appropriately.
+ 
+ 
+ 
+EXTRA CREDIT:
+
+ 	The extra credit for this assignment is not done until after this project has been submitted.
+
+
+----------------------------------------------------------------------------
+
+All content in a README file is expected to be written in clear English with
+proper grammar, spelling, and punctuation. If you are not a strong writer,
+be sure to get someone else to help you with proofreading. Consider all project
+documentation to be professional writing for your boss and/or potential
+customers.

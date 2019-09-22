@@ -1,0 +1,199 @@
+****************
+* Circuit Tracer
+* CS221 - 3
+* 5/3/19
+* Austen Hale
+**************** 
+
+OVERVIEW:
+
+ This program takes in a valid file format (in the form of X row and Y columns)
+ and finds every path from the starting point to the ending point, and prints
+ the results either to the console, or onto a GUI.
+ 
+
+
+INCLUDED FILES:
+
+ * CircuitTracer.java - This is the class that creates a CircuitTracer object.
+ 						The CircuitTracer class checks the command line arguments,
+ 						as well as running the search algorithm. It will then print
+ 						the best paths for the file to the console, or open up a GUI
+ 						to show the best paths (depending on initial command line arguments).
+ 
+ * CircuitBoard.java - This class creates the CircuitBoard using the passed in file (file is read
+ 						in from CircuitTracer as the 3rd argument). The CircuitBoard class will
+ 						ensure that the format of the inputed file is valid (has no characters that 
+ 						aren't OXT12, the actual row and column lengths match the sizes inputed, that
+ 						there are actually ONE '1' and ONE '2'). After ensuring the file is correct,
+ 						the CircuitBoard class will read the file line by line to replicate the file
+ 						into the program, and create the appropriate CircuitBoard which will then be
+ 						called by CircuitTracer to search for all the paths.
+ 						
+ * TraceState.java - This class creates a TraceState object, which is used to track the progress of the
+ 						path search algorithm and tell if the search is completed or not. It has several
+ 						methods inside that help CircuitTracer and CircuitBoard successfully complete their
+ 						tasks, such as telling if the path is complete, the length of the path, etc.
+ 						
+ * Storage.java - This class is used as a storage for the TraceStates. Depending on which command line argument was inputed,
+ 					Storage will be either a stack or queue. The effect that it using a stack or queue has is detailed below
+ 					in the ANALYSIS section.
+ 					
+ * InvalidFileFormatException.java - This is a custom made exception class that is thrown whenever CircuitBoard finds an issue
+ 										the inputed file, such as characters that aren't in the allowed case.
+ 										
+ * OccupiedPositionException.java - This is a custom made exception class that is thrown whenever the CircuitBoard class is trying
+ 										to interact with a spot that is already occupied.
+ * README - For users to read to hopefully answer any questions they have about running or using
+ 			the program. (This file)
+
+ANALYSIS:
+ 1. How does the choice of Storage configuration (stack vs queue) affect the sequence in which paths are explored in
+ 	search algorithm?)
+ 	
+ 		Stacks will generally fully explore one path before moving onto the next. It will keep going down the path of the last
+ 		added TraceState, and continue doing that until it hits the end or a dead end (the stack will also remove TraceStates off the stack as it finds them to be invalid).
+ 		Then it will back up to the last TraceState that wasn't already explored, and go down that path again. 
+ 		Queues on the other hand will explore all the paths at the same time,
+ 		adding 1 more TraceState to each possible path until it reaches every possible solution.
+ 		
+ 2. Is the total number of search states (possible paths) affected by the choice of stack or queue?
+ 
+ 		In the end, stack and queue will both search the total amount of paths as it is a brute-force algorithm, and thus will explore
+ 		every possible option. 
+ 
+ 3. How is memory use (the maximum number of states in Storage at one time) affected by the choice of underlying
+ 	structure?
+ 	
+ 		As noted in the first answer, the stack deletes as it finishes up, and thus saves memory usage as it goes. Queue,
+ 		on the other hand, does not delete any of its paths and keeps building them up until they hit a dead end or
+ 		a solution. Thus, queue uses more memory than stack as it keeps building up more and more TraceStates as the search goes on.
+ 		
+ 4. What is the Big-Oh runtime for the search algorithm? Does it reflect the maximum size of Storage? Does it reflect the
+ 	number of board positions? Does it reflect the number of paths explored? Does it reflect the maximum path length?
+ 	
+ 		The Big-Oh runtime for the search algorithm would be O(nlog(n))  as it has to search 
+ 		through every single possibility, but does this all in one loop without any other calls to methods that would also be O(n). 
+ 		The runtime reflects the maximum size of Storage, the number of board positions, the number of paths, and the maximum path length in terms that the bigger
+ 		the board is, and the further apart 1 and 2 are, the most possibilities there are. However, these do not change the
+ 		runtime from O(n), even as the board size grows larger with bigger boards. Having a growth function would
+ 		reflect directly on the size of Storage, the number of positions, paths, and the maximum path length, but for simply
+ 		the Big-Oh runtime, it does not change from O(nlog(n)).
+ 		
+ 5. Does using one of the storage structures usually find a solution in fewer steps than the other? Always?
+ 
+ 		If your goal is to simply find a solution as fast as possible (as in an solution, not just the shortest one),
+ 		a stack would be best for this case as it goes down a path until it finds a solution. A queue however, would be best
+ 		for finding the shortest solution, as it goes through all the X steps solutions at the same time. This doesn't mean
+ 		that the queue will always find the shortest solution the fastest though, due to the stack being able to get lucky
+ 		and find the solution on its first try.
+ 
+ 6. Does using either of the storage structures guarantee that the first solution found will be a shortest path?
+ 
+ 		As noted above, a queue finds the solutions in shortest paths first, due to it doing all the paths at the same time.
+ 		A stack does not guarantee that the first solution it finds will be the shortest path, as it just goes down based off the
+ 		last TraceState added to the stack, which depending on luck could be the shortest path or not.
+
+COMPILING AND RUNNING:
+
+ To run the CircuitTracer program, begin by typing 
+ 
+ javac CircuitTracer.java
+
+ into the command line. This compiles the program, and readys it for use. Next type:
+ 
+ java CircuitTracer [-s | -q] [-c | -g] [filename]
+ 
+ into the command line. Note here that if there is a | between two lines, you MUST choose
+ one of them. -s means that the search will run as a stack, while -q means the search will run as
+ a queue. -c runs the program in console mode, and will print the results to the console, while -g
+ runs the program in GUI mode, and will open a GUI with the results after finishing the search
+ algorithm. Filename is the file that you would like to find a path for. Note that this file 
+ should follow the format of having the first line contain the size of row and columns, respectively,
+ followed by a series of rows and columns that contain only characters in the list 'OXT12'. There MUST
+ only be ONE '1' and ONE '2'. There can be as many capital 0's as wanted, as well as X's. The file
+ does not need to be solvable for the program to state that it is valid. Note that trying to run the
+ program with less or more than 3 command line arguments, or in the wrong order, will result in an 
+ InvalidFileFormatException being thrown.
+ 
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+
+ The main goal of this program is to take in a file and, if that file is valid (see above), find every best
+ path from the starting point to the ending point. To do this, there are four main classes that all work together:
+ CircuitTracer, CircuitBoard, TraceState, and Storage, along with two Exception classes. 
+ 
+ CircuitTracer's main job is to find all the search paths, and its
+ secondary job is checking that the command line arguments are valid. CircuitTracer uses the TraceState class
+ to keep track of paths while searching for the all the shortest paths from start to end, and uses the CircuitBoard
+ class to create a board that it can search through. The CircuitTracer class uses a brute force search algorithm
+ that explores every possible move that could be made, either wrong or correct, that leads from the starting point
+ to the end point. While going through every single possibility, it adds or removes the TraceStates to a stack
+ or queue as a storage system, based off the inputed command line argument. The search algorithm saves the shortest
+ paths it finds while searching and puts them in a list. If it finds a path shorter than the path(s) in the shortest
+ path lists, it removes all and adds that new path. After it finishing searchings, it will print all, if any, of the
+ best solutions to either the console or onto a GUI so that the user can easily see the solution.
+ 
+ CircuitBoard's main job is to create the CircuitBoard by reading in the inputed file. If this file has any
+ issues (as described in the compiling section), it will declare the file invalid and throw an 
+ InvalidFileFormatException. After ensuring that the file is valid, it will begin reading the file line by line
+ to replicate the board that is in the file in the program. If the file finds a 1 or a 2 in the file, it will
+ assign the coordinates the 1 and 2 have to starting and ending points, respectively. Should it find more than one
+ of each, it will declare the file invalid. CircuitBoard also has several other methods inside it that are used
+ by CircuitTracer to help search through the board, and find a complete path.
+ 
+ TraceState is a class that is used to represent progress through the path created by CircuitBoard, and searched by
+ CircuitTracer. Each time a new move is made in the search, a new TraceState is made with the old TraceState being
+ used as its base (the TraceState constructor that uses another TraceState instead of a board). TraceState contains
+ several methods that help CircuitTracer to find the path and determine if it is a complete path or not.
+ 
+ Storage stores the TraceStates that make up the path while CircutTracer searches. It can be either stack or queue,
+ where stack is useful for finding a path fast, while queue is useful for finding the shortest path fast, although
+ the program runs until it finds all the best solutions.
+ 
+ The two custom made Exception classes are used throughout the program at appropriate spots. InvaildFileFormatException
+ is used to tell users that when the CircuitBoard class was reading in the file, it found an issue with the file, and 
+ tells the user what's invalid about that file. OccupiedPositionException will tell the user when they attempt to occupy
+ a spot that does not have an O in it. However, since the user will only ever input command line arguments, this is more
+ meant for the developers to know that the code they just wrote is not legal in this progam.
+
+TESTING:
+
+ Testing that this program worked successfully was done by using a given tester class. The tester
+ class tested for several things, among them being: successfully creating a valid CircuitBoard, 
+ throwing InvalidFileFormatExceptions at appropriate times, checking that the command line arguments
+ were valid, and that the inputed file was a valid file overall. I also did some manual testing to 
+ make sure that the GUI's search paths matched the expected search paths from the console, and the
+ search paths were indeed the same.
+
+
+DISCUSSION:
+ 
+ The main issue I had during development would be when I figured out why one invalid file was failing
+ the test (in other words it was an invalid file). The invalid file that was being a pain for me
+ was invalid8.dat, as its rows and columns are reverse of what they say they are, but my code at the
+ time corrected it when it created the CircuitBoard, and thus it failed the tester. To fix this, I looked
+ back onto my FormatChecker class where I had a similar issue, and used the same concepts there to fix
+ this current issue and always write the inputed file exactly the same into the program's board.
+ 
+ I would say that the only other issue I had during development was when I was making the GUI, I was creating
+ it outside of the -g condition statement just for testing purposes and laziness. When it came time to move
+ everything into its proper spot, I was all of a sudden getting a NullPointerException. After awhile of looking
+ over the code and running through it with the debugger, I finally found the issue to be one close bracket
+ out of place ruining everything. After moving the bracket to its proper place, everything worked properly
+ and I was done with the project.
+ 
+ 
+EXTRA CREDIT:
+
+ This project had one extra credit option, which was creating a GUI for the printed search paths.
+ I did successfully implement this, and the program should open a GUI upon being run with -g instead
+ of -c at the command line arguments.
+
+
+----------------------------------------------------------------------------
+
+All content in a README file is expected to be written in clear English with
+proper grammar, spelling, and punctuation. If you are not a strong writer,
+be sure to get someone else to help you with proofreading. Consider all project
+documentation to be professional writing for your boss and/or potential
+customers.

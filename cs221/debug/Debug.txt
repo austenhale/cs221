@@ -1,0 +1,49 @@
+I started the assignment by importing all the classes then running the SetTester class.
+The tester returned Total Tests: 51, passed: 32, failed 19, and the first test failed was
+emptySet_testIsEmpty, so I looked at that method in the SetTester class. I put a debugger
+breakpoint at line 109 in SetTester, and ran the debugger. Using step into,
+it took me to line 98 of SetTester, where it says that the empty set has
+a starting size of two, and the method return it being empty should return true.
+However, it fails the test so it is currently returning false on an empty set,
+which means that the isEmpty() method is not working accurately. The constructor
+for the ArraySet class sets rear to 0, and isEmpty only returns an accurate
+statement if rear is greater than 0. Thus, isEmpty() needs to check for if rear
+is 0, and return true if it is 0. To fix this, I had the isEmpty() method
+return true if rear is equivalent to 0, else return false.
+
+After modifying the isEmpty() method, I ran the tester again. This time,
+it returned Total tests: 51, passed: 29, failed: 22. So, the tester
+actually failed more than tests than last time, but I believe that the
+change I made to the isEmpty() method is a valid change to the program,
+and that there is another issue that needs to be fixed to complete the
+program. Looking at the tester, the new empty set tests all pass, but 
+every other isEmpty test fails. This could be because the isEmpty
+method is always returning true, which would mean that rear always
+equals 0. Looking at the tester, I also see that testing the size, except
+on an empty set, also fails. I put my next breakpoint on line 145 and 146
+of SetTester, where the tests for the set being empty and size were both failing.
+Using step into, I see that the size of the set should be 2 again, and that
+the size should return 1 while isEmpty should return false. However, if
+isEmpty is returning true, then that means rear (and hence the size) is 
+0, which would mean that rear does not increase in size currently. The
+add method does not fail the test, but I suspected that it might be the
+issue, so I placed a breakpoint on line 149 where the add method
+on an empty set is called for testing. Stepping into that twice took me
+to the add method, and I see that the add method succeeds in adding
+the element to the set, but it does not increase the counter 
+of the size of the set (rear) as it should. To fix this issue,
+I had rear increment whenever an element was added to the set,
+as if an element was added to the set, then the size would go up, and
+hence rear should increase.
+
+Running the SetTester now, it returns Total Tests: 93, Passed: 91, Failed: 2. 
+I see that the first failed test was A_addB_AB_testRemoveA, so I found that
+in the SetTester class. I found that test on line 263 of SetTester, and
+begun stepping into it. Stepping into it took me into the remove method,
+which, alongside with the tester class, showed that there was an
+out of bounds exception. Using the variables section of the debugger,
+I found that rear was one number too high, so that i occasionally
+went out of bounds with extending the array. Subtracting 1 from
+rear solved the issue, and the tester returned with all tests passed.
+
+

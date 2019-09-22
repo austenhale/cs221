@@ -1,0 +1,75 @@
+*************
+* Project 0 : MagicSquare
+* Author: Austen Hale
+* Class: CS 221, Section 3
+* Semester: Spring 2019
+*************
+
+OVERVIEW:
+
+	This program allows the user to either check or create a magic square. If the user
+	chooses to create a magic square, that magic square is stored in a file. If checking,
+	the program will print out the magic square to the console and state if it is a magic
+	square or not.
+
+INCLUDED FILES:
+
+* MagicSquare.java - contains code for checking or create magic squares
+* MagicSquareDriver.java - driver class for the project
+* README - for people to not read when they run the program
+
+COMPILING AND USING
+
+	To compile this program, type javac MagicSquareDriver.java in the console. Then type
+	java MagicSquareDriver [-check | -create] [filename] [ |size] to properly run the program.
+	Size should only be included with the -create flag, and only -create OR -check should be used.
+	The user should input the arguments into the console exactly as shown above to properly use
+	this program. Typing the arguments in a different order will result in squares not being
+	able to be created or checked. Assuming that the user compiles the program properly from 
+	the console, there is nothing more that the user has to do. The square will either be created and 
+	tored in a file, or the square will be printed to the console, and declared if it is a magic
+	square or not.
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS
+
+	The program consists of two classes, the driver class that reads command line prompts, and the 
+	the MagicSquare class which has the bulk of the code. The MagicSquare class has the check method,
+	which calls on the readMatrix method to read in a file to the program, then use several checks
+	to see if the magic square is an actual magic square or not. The MagicSquare class also has the create
+	method to allow users to create their own magic square, given that they inputed an odd number into the
+	console when they typed their command into the console. The create method uses an algorithim that 
+	can only successfully make a magic square with an odd number, and it calls the write method at the end
+	of its code to write the magic square to a file.
+	
+TESTING:
+
+	To test my program, I tried every combination that I could think of when inputing the console run 
+	command. I tested for no console line arguments, for even numbers, for using size with the -check
+	flag, and for inputting too many console line arguments. As far as I know, the program will cover
+	every possible invalid input, and in the case that it doesn't, the program should print out the
+	proper format to use that will allow the user to properly use the program.
+	
+DISCUSSION: 
+	
+	I didn't have many issues during the development of this program; for the most part it was just time consuming,
+	especially since for the first half of the project, my eclipse program was lagging quite badly. If I had to
+	list an issue that I encountered while creating this program, I would say it would be completing the
+	checkMatrix method of the MagicSquare class, and for figuring out how to get the console to read command
+	line arguments. The checkMatrix method just took me time to figure out the best way to go through all the
+	numbers in the matrix and add them together, but it still proved to be more troublesome than the other 3 methods.
+	For the command line prompts, I was looking online and saw people talking about using the different positions
+	of args, such as args[0], and the solution clicked for me. In terms of errors, I did get some errors while
+	working on the command line prompt section of the project, but those errors were quickly fixed with try/catchs.
+			
+## Sources Used
+
+The only source I used outside of previously taught material was how to print out a 2D array.
+//snr of stackoverflow
+//			System.out.println("------------");
+//			for (int[] print : matrix) {
+//				for (int prints : print) {
+//					System.out.print(prints + " ");
+//				}
+//				System.out.println();
+//			}
+//			System.out.println("------------"); 
